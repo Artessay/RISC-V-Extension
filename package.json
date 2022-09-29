@@ -1,0 +1,55 @@
+{
+	"name": "riscv",
+	"displayName": "RISC-V Extension",
+	"description": "Provides syntax highlighting and snippets for RISC-V assembly language",
+	"version": "0.0.1",
+	"publisher": "rihong",
+	"engines": {
+		"vscode": "^1.5.0"
+	},
+	"homepage": "",
+	"icon": "images/icon.png",
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"bugs": {
+		"url": "",
+		"email": "rihong.edu@outlook.com"
+	},
+	"categories": [
+		"Languages",
+		"Snippets"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "riscv",
+				"aliases": [
+					"RISC-V Assembly",
+					"riscv"
+				],
+				"extensions": [
+					".S",
+					".s",
+					".riscv",
+					".asm"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "riscv",
+				"scopeName": "source.riscv",
+				"path": "./syntaxes/riscv.tmLanguage"
+			}
+		],
+		"snippets": [
+			{
+				"language": "riscv",
+				"path": "./snippets/snippets.json"
+			}
+		]
+	}
+}
