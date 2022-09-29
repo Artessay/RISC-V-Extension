@@ -1,8 +1,8 @@
 {
-	"name": "riscv",
+	"name": "riscv-extension",
 	"displayName": "RISC-V Extension",
-	"description": "Provides syntax highlighting and snippets for RISC-V assembly language",
-	"version": "0.0.1",
+	"description": "RISC-V syntax highlighting and snippets",
+	"version": "0.0.2",
 	"publisher": "rihong",
 	"engines": {
 		"vscode": "^1.5.0"
@@ -18,7 +18,7 @@
 		"email": "rihong.edu@outlook.com"
 	},
 	"categories": [
-		"Languages",
+		"Programming Languages",
 		"Snippets"
 	],
 	"contributes": {

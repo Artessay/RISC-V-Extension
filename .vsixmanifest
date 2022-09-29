@@ -5,7 +5,7 @@
     <DisplayName>RISC-V Support</DisplayName>
     <Description xml:space="preserve">Provides syntax highlighting and snippets for RISC-V assembly language</Description>
     <Tags>snippet,riscv,RISC-V Assembly,__ext_S,__ext_s,__ext_riscv,__ext_asm</Tags>
-    <Categories>Languages,Snippets</Categories>
+    <Categories>Programming Languages,Snippets</Categories>
     <GalleryFlags>Public</GalleryFlags>
     <Badges></Badges>
     <Properties>
