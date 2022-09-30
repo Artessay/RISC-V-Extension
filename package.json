@@ -2,7 +2,7 @@
 	"name": "riscv-extension",
 	"displayName": "RISC-V Extension",
 	"description": "RISC-V Operating System development extension",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "rihong",
 	"engines": {
 		"vscode": "^1.5.0"
