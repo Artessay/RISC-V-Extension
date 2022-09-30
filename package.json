@@ -2,20 +2,10 @@
 	"name": "riscv-extension",
 	"displayName": "RISC-V Extension",
 	"description": "RISC-V syntax highlighting and snippets",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "rihong",
 	"engines": {
 		"vscode": "^1.5.0"
-	},
-	"homepage": "https://github.com/Artessay/RISCV-Extension",
-	"icon": "images/icon.png",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Artessay/RISCV-Extension"
-	},
-	"bugs": {
-		"url": "https://github.com/Artessay/RISCV-Extension/issues",
-		"email": "rihong.edu@outlook.com"
 	},
 	"categories": [
 		"Programming Languages",
@@ -35,14 +25,32 @@
 					".riscv",
 					".asm"
 				],
-				"configuration": "./language-configuration.json"
+				"configuration": "./configs/riscv-language-configuration.json"
+			},
+			{
+				"id": "linkerscript",
+				"aliases": [
+					"linkerscript",
+					"LinkerScript"
+				],
+				"extensions": [
+					".ld",
+					".lds",
+					".dld"
+				],
+				"configuration": "./configs/linker-language-configuration.json"
 			}
 		],
 		"grammars": [
 			{
 				"language": "riscv",
 				"scopeName": "source.riscv",
-				"path": "./syntaxes/riscv.tmLanguage"
+				"path": "./syntaxes/riscv.tmLanguage.xml"
+			},
+			{
+				"language": "linkerscript",
+				"scopeName": "source.ld",
+				"path": "./syntaxes/linkerscript.tmLanguage.json"
 			}
 		],
 		"snippets": [
@@ -51,5 +59,18 @@
 				"path": "./snippets/snippets.json"
 			}
 		]
+	},
+	"icon": "images/icon.png",
+	"homepage": "https://github.com/Artessay/RISCV-Extension",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Artessay/RISCV-Extension"
+	},
+	"bugs": {
+		"url": "https://github.com/Artessay/RISCV-Extension/issues",
+		"email": "rihong.edu@outlook.com"
+	},
+	"dependencies": {
+		"yamljs": "^0.3.0"
 	}
 }
