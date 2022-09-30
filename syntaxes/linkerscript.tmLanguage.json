@@ -1,406 +1,341 @@
 {
-    "name":"LinkerScript",
-    "scopeName":"source.ld",
-    "fileTypes":[
+    "name": "LinkerScript",
+    "scopeName": "source.ld",
+    "fileTypes": [
         "ld"
     ],
-    "patterns":[
+    "patterns": [
         {
-            "include":"#comments"
+            "include": "#comments"
         },
         {
-            "include":"#simple_commands"
+            "include": "#simple_commands"
         },
         {
-            "include":"#assignments"
+            "include": "#assignments"
         },
         {
-            "include":"#sections"
+            "include": "#sections"
         },
         {
-            "include":"#memory"
+            "include": "#memory"
         },
         {
-            "include":"#phdrs"
+            "include": "#phdrs"
         },
         {
-            "include":"#version"
+            "include": "#version"
         },
         {
-            "include":"#expressions"
+            "include": "#expressions"
         }
     ],
-    "repository":{
-        "comments":{
-            "name":"comment.block.ld",
-            "begin":"\/\\*",
-            "beginCaptures":[
-                {
-                    "name":"punctuation.definition.comment.begin.ld"
+    "repository": {
+        "comments": {
+            "name": "comment.block.ld",
+            "begin": "/\\*",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.comment.begin.ld"
                 }
-            ],
-            "end":"\\*\/",
-            "endCaptures":[
+            },
+            "end": "\\*/",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.comment.end.ld"
+                }
+            }
+        },
+        "simple_commands": {
+            "patterns": [
                 {
-                    "name":"punctuation.definition.comment.end.ld"
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?: ENTRY )\\b"
+                },
+                {
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?: INCLUDE |INPUT |GROUP |OUTPUT |SEARCH_DIR |STARTUP )\\b"
+                },
+                {
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?: OUTPUT_FORMAT |TARGET )\\b"
+                },
+                {
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?: ASSERT |EXTERN |FORCE_COMMON_ALLOCATION |INHIBIT_COMMON_ALLOCATION |NOCROSSREFS |OUTPUT_ARCH )\\b"
                 }
             ]
         },
-        "simple_commands":{
-            "patterns":[
+        "assignments": {
+            "patterns": [
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":{
-                        "(?x) \\b(?":"",
-                        "0":"ENTRY",
-                        "1":")\\b"
-                    }
+                    "name": "keyword.operand.ld",
+                    "match": "=|\\+=|-=|\\*=|/=|<<=|>>=|&=|\\|="
                 },
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":{
-                        "(?x) \\b(?":"",
-                        "0":"INCLUDE",
-                        "1":"|INPUT",
-                        "2":"|GROUP",
-                        "3":"|OUTPUT",
-                        "4":"|SEARCH_DIR",
-                        "5":"|STARTUP",
-                        "6":")\\b"
-                    }
-                },
-                {
-                    "name":"support.function.builtin.ld",
-                    "match":{
-                        "(?x) \\b(?":"",
-                        "0":"OUTPUT_FORMAT",
-                        "1":"|TARGET",
-                        "2":")\\b"
-                    }
-                },
-                {
-                    "name":"support.function.builtin.ld",
-                    "match":{
-                        "(?x) \\b(?":"",
-                        "0":"ASSERT",
-                        "1":"|EXTERN",
-                        "2":"|FORCE_COMMON_ALLOCATION",
-                        "3":"|INHIBIT_COMMON_ALLOCATION",
-                        "4":"|NOCROSSREFS",
-                        "5":"|OUTPUT_ARCH",
-                        "6":")\\b"
-                    }
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?: PROVIDE |HIDDEN |PROVIDE_HIDDEN )\\b"
                 }
             ]
         },
-        "assignments":{
-            "patterns":[
+        "sections": {
+            "patterns": [
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"=|\\+=|-=|\\*=|\/=|<<=|>>=|&=|\\|="
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?:SECTIONS)\\b"
                 },
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":{
-                        "(?x) \\b(?":"",
-                        "0":"PROVIDE",
-                        "1":"|HIDDEN",
-                        "2":"|PROVIDE_HIDDEN",
-                        "3":")\\b"
-                    }
-                }
-            ]
-        },
-        "sections":{
-            "patterns":[
-                {
-                    "name":"support.function.builtin.ld",
-                    "match":"(?x) \\b(?:SECTIONS)\\b"
-                },
-                {
-                    "name":"section.input.ld",
-                    "match":"(?x) (\\S+)((?:\\s*\\(\\s*)(((\\.[\\.\\*\\w]+)(?:\\s*))+)(?:\\s*\\)))",
-                    "captures":{
-                        "1":{
-                            "name":"support.function.builtin.ld"
+                    "name": "section.input.ld",
+                    "match": "(?x) (\\S+)((?:\\s*\\(\\s*)(((\\.[\\.\\*\\w]+)(?:\\s*))+)(?:\\s*\\)))",
+                    "captures": {
+                        "1": {
+                            "name": "support.function.builtin.ld"
                         },
-                        "3":{
-                            "name":"variable.other.ld"
+                        "3": {
+                            "name": "variable.other.ld"
                         }
                     }
                 },
                 {
-                    "name":"section.output.prepart.ld",
-                    "match":"(?mx) (\\B\\.[\\.\\*\\w]+\\b)(?:\\s*)(\\w*)(?:\\s*)((\\(\\s*[\\w]*\\s*\\))?)(?:\\s*)(\\:)(?:\\s*)((AT)?)(?:\\s*\\(?)(\\w*)(?:\\s*\\)?)",
-                    "captures":{
-                        "1":{
-                            "name":"variable.other.ld"
+                    "name": "section.output.prepart.ld",
+                    "match": "(?mx) (\\B\\.[\\.\\*\\w]+\\b)(?:\\s*)(\\w*)(?:\\s*)((\\(\\s*[\\w]*\\s*\\))?)(?:\\s*)(\\:)(?:\\s*)((AT)?)(?:\\s*\\(?)(\\w*)(?:\\s*\\)?)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.ld"
                         },
-                        "2":{
-                            "name":"constant.numeric.ld"
+                        "2": {
+                            "name": "constant.numeric.ld"
                         },
-                        "4":{
-                            "name":"keyword.control.ld"
+                        "4": {
+                            "name": "keyword.control.ld"
                         },
-                        "5':    # ":{
-                            "name":"keyword.operand.ld"
+                        "5": {
+                            "name": "keyword.operand.ld"
                         },
-                        "7":{
-                            "name":"support.function.builtin.ld"
+                        "7": {
+                            "name": "support.function.builtin.ld"
                         },
-                        "8":{
-                            "name":"constant.numeric.ld"
+                        "8": {
+                            "name": "constant.numeric.ld"
                         }
                     }
                 },
                 {
-                    "name":"section.output.postpart.ld",
-                    "match":"(?:\\}\\s*)((\\>)(\\s*\\w*)?)(?:\\s*)((AT)(?:\\s*)(\\>)(?:\\s*)(\\w*))?(?:\\s*)(((\\:\\w*)(?:\\s*))*)(((\\=)(?:\\s*)(\\w*))?)",
-                    "captures":{
-                        "2":{
-                            "name":"keyword.operand.ld"
+                    "name": "section.output.postpart.ld",
+                    "match": "(?:\\}\\s*)((\\>)(\\s*\\w*)?)(?:\\s*)((AT)(?:\\s*)(\\>)(?:\\s*)(\\w*))?(?:\\s*)(((\\:\\w*)(?:\\s*))*)(((\\=)(?:\\s*)(\\w*))?)",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.operand.ld"
                         },
-                        "3":{
-                            "name":"variable.other.ld"
+                        "3": {
+                            "name": "variable.other.ld"
                         },
-                        "5":{
-                            "name":"support.function.builtin.ld"
+                        "5": {
+                            "name": "support.function.builtin.ld"
                         },
-                        "6":{
-                            "name":"keyword.operand.ld"
+                        "6": {
+                            "name": "keyword.operand.ld"
                         },
-                        "7":{
-                            "name":"variable.other.ld"
+                        "7": {
+                            "name": "variable.other.ld"
                         },
-                        "8":{
-                            "name":"keyword.control.ld"
+                        "8": {
+                            "name": "keyword.control.ld"
                         },
-                        "13":{
-                            "name":"keyword.operand.ld"
+                        "13": {
+                            "name": "keyword.operand.ld"
                         },
-                        "14":{
-                            "name":"constant.numeric.ld"
+                        "14": {
+                            "name": "constant.numeric.ld"
                         }
                     }
                 },
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":{
-                        "(?x) \\b(?":"",
-                        "0":"EXCLUDE_FILE",
-                        "1":"|CREATE_OBJECT_SYMBOLS",
-                        "2":"|CONSTRUCTORS",
-                        "3":")\\b"
-                    }
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?: EXCLUDE_FILE |CREATE_OBJECT_SYMBOLS |CONSTRUCTORS )\\b"
                 },
                 {
-                    "name":"datatypes.ld",
-                    "match":"(?x) (BYTE|SHORT|LONG|QUAD|SQUAD)(?:\\s*\\(\\s*)([^\\(\\)]*)(?:\\s*\\))",
-                    "captures":{
-                        "1":{
-                            "name":"support.type.ld"
+                    "name": "datatypes.ld",
+                    "match": "(?x) (BYTE|SHORT|LONG|QUAD|SQUAD)(?:\\s*\\(\\s*)([^\\(\\)]*)(?:\\s*\\))",
+                    "captures": {
+                        "1": {
+                            "name": "support.type.ld"
                         },
-                        "2":{
-                            "name":"constant.numeric.ld"
+                        "2": {
+                            "name": "constant.numeric.ld"
                         }
                     }
                 },
                 {
-                    "name":"section.discard.ld",
-                    "match":"(\/DISCARD\/)(?:\\s*)(\\:)",
-                    "captures":{
-                        "1":{
-                            "name":"variable.other.ld"
+                    "name": "section.discard.ld",
+                    "match": "(/DISCARD/)(?:\\s*)(\\:)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.ld"
                         },
-                        "2':    # ":{
-                            "name":"keyword.operand.ld"
+                        "2": {
+                            "name": "keyword.operand.ld"
                         }
                     }
                 }
             ]
         },
-        "memory":{
-            "patterns":[
+        "memory": {
+            "patterns": [
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":"(?x) \\b(?:MEMORY)\\b"
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?:MEMORY)\\b"
                 },
                 {
-                    "name":"memory.config.ld",
-                    "match":"(\\S*)(?:\\s*\\(\\s*)((R|r|W|w|X|x|A|a|I|i|L|l|\\!)+)(?:\\s*\\)\\s*)(\\:)((?:\\s*)(ORIGIN|org|o|LENGTH|len|l)(?:\\s*)(\\=)(?:\\s*)(\\w*)(,?))((?:\\s*)(ORIGIN|org|o|LENGTH|len|l)(?:\\s*)(\\=)(?:\\s*)(\\w*))",
-                    "captures":{
-                        "1":{
-                            "name":"variable.other.ld"
+                    "name": "memory.config.ld",
+                    "match": "(\\S*)(?:\\s*\\(\\s*)((R|r|W|w|X|x|A|a|I|i|L|l|\\!)+)(?:\\s*\\)\\s*)(\\:)((?:\\s*)(ORIGIN|org|o|LENGTH|len|l)(?:\\s*)(\\=)(?:\\s*)(\\w*)(,?))((?:\\s*)(ORIGIN|org|o|LENGTH|len|l)(?:\\s*)(\\=)(?:\\s*)(\\w*))",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.ld"
                         },
-                        "2":{
-                            "name":"keyword.control.ld"
+                        "2": {
+                            "name": "keyword.control.ld"
                         },
-                        "4':    # ":{
-                            "name":"keyword.operand.ld"
+                        "4": {
+                            "name": "keyword.operand.ld"
                         },
-                        "6":{
-                            "name":"support.variable.ld"
+                        "6": {
+                            "name": "support.variable.ld"
                         },
-                        "7":{
-                            "name":"keyword.operand.ld"
+                        "7": {
+                            "name": "keyword.operand.ld"
                         },
-                        "8":{
-                            "name":"constant.numeric.ld"
+                        "8": {
+                            "name": "constant.numeric.ld"
                         },
-                        "11":{
-                            "name":"support.variable.ld"
+                        "11": {
+                            "name": "support.variable.ld"
                         },
-                        "12":{
-                            "name":"keyword.operand.ld"
+                        "12": {
+                            "name": "keyword.operand.ld"
                         },
-                        "13":{
-                            "name":"constant.numeric.ld"
+                        "13": {
+                            "name": "constant.numeric.ld"
                         }
                     }
                 },
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":{
-                        "(?x) \\b(?":"",
-                        "0":"LENGTH",
-                        "1":"|len",
-                        "2":"|l",
-                        "3":"|ORIGIN",
-                        "4":"|org",
-                        "5":"|o",
-                        "6":")\\b"
-                    }
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?: LENGTH |len |l |ORIGIN |org |o )\\b"
                 }
             ]
         },
-        "phdrs":{
-            "patterns":[
+        "phdrs": {
+            "patterns": [
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":"(?x) \\b(?:PHDRS)\\b"
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?:PHDRS)\\b"
                 },
                 {
-                    "name":"phdrs.config.ld",
-                    "match":"(\\w*)(?:\\s*)(PT_NULL|PT_LOAD|PT_DYNAMIC|PT_INTERP|PT_NOTE|PT_SHLIB|PT_PHDR)(?:\\s*)((FILEHDR)?)(?:\\s*)((PHDRS)?)(?:\\s*)((((AT)?)(?:\\s*\\(\\s*)(\\w*)(?:\\s*\\)\\s*))?)((((FLAGS)?)(?:\\s*\\(\\s*)(\\w*)(?:\\s*\\)\\s*))?)(\\;)",
-                    "captures":{
-                        "1":{
-                            "name":"variable.other.ld"
+                    "name": "phdrs.config.ld",
+                    "match": "(\\w*)(?:\\s*)(PT_NULL|PT_LOAD|PT_DYNAMIC|PT_INTERP|PT_NOTE|PT_SHLIB|PT_PHDR)(?:\\s*)((FILEHDR)?)(?:\\s*)((PHDRS)?)(?:\\s*)((((AT)?)(?:\\s*\\(\\s*)(\\w*)(?:\\s*\\)\\s*))?)((((FLAGS)?)(?:\\s*\\(\\s*)(\\w*)(?:\\s*\\)\\s*))?)(\\;)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.ld"
                         },
-                        "2":{
-                            "name":"constant.numeric.ld"
+                        "2": {
+                            "name": "constant.numeric.ld"
                         },
-                        "4":{
-                            "name":"keyword.control.ld"
+                        "4": {
+                            "name": "keyword.control.ld"
                         },
-                        "6":{
-                            "name":"keyword.control.ld"
+                        "6": {
+                            "name": "keyword.control.ld"
                         },
-                        "10":{
-                            "name":"support.function.builtin.ld"
+                        "10": {
+                            "name": "support.function.builtin.ld"
                         },
-                        "11":{
-                            "name":"constant.numeric.ld"
+                        "11": {
+                            "name": "constant.numeric.ld"
                         },
-                        "15":{
-                            "name":"support.function.builtin.ld"
+                        "15": {
+                            "name": "support.function.builtin.ld"
                         },
-                        "16":{
-                            "name":"constant.numeric.ld"
+                        "16": {
+                            "name": "constant.numeric.ld"
                         }
                     }
                 }
             ]
         },
-        "version":{
-            "patterns":[
+        "version": {
+            "patterns": [
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":"(?x) \\b(?:VERSION)\\b"
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?:VERSION)\\b"
                 }
             ]
         },
-        "expressions":{
-            "patterns":[
+        "expressions": {
+            "patterns": [
                 {
-                    "name":"expression.ld",
-                    "match":"(\\w*)(?:\\s*)(=|\\+=|-=|\\*=|\/=|<<=|>>=|&=|\\|=)",
-                    "captures":{
-                        "1":{
-                            "name":"variable.other.ld"
+                    "name": "expression.ld",
+                    "match": "(\\w*)(?:\\s*)(=|\\+=|-=|\\*=|/=|<<=|>>=|&=|\\|=)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.ld"
                         },
-                        "2":{
-                            "name":"keyword.operand.ld"
+                        "2": {
+                            "name": "keyword.operand.ld"
                         }
                     }
                 },
                 {
-                    "name":"constant.numeric.ld",
-                    "match":"(?x) \\b(?:(MAXPAGESIZE)|(COMMONPAGESIZE))\\b"
+                    "name": "constant.numeric.ld",
+                    "match": "(?x) \\b(?:(MAXPAGESIZE)|(COMMONPAGESIZE))\\b"
                 },
                 {
-                    "name":"variable.other.ld",
-                    "match":"\\."
+                    "name": "variable.other.ld",
+                    "match": "\\."
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"!|-|~"
+                    "name": "keyword.operand.ld",
+                    "match": "!|-|~"
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"\\*|\/|%"
+                    "name": "keyword.operand.ld",
+                    "match": "\\*|/|%"
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"\\+|\\-"
+                    "name": "keyword.operand.ld",
+                    "match": "\\+|\\-"
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"<<|>>"
+                    "name": "keyword.operand.ld",
+                    "match": "<<|>>"
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"==|!=|>|<|>=|<="
+                    "name": "keyword.operand.ld",
+                    "match": "==|!=|>|<|>=|<="
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"&"
+                    "name": "keyword.operand.ld",
+                    "match": "&"
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"\\|"
+                    "name": "keyword.operand.ld",
+                    "match": "\\|"
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"&&"
+                    "name": "keyword.operand.ld",
+                    "match": "&&"
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"\\|\\|"
+                    "name": "keyword.operand.ld",
+                    "match": "\\|\\|"
                 },
                 {
-                    "name":"keyword.operand.ld",
-                    "match":"\\?|\\:"
+                    "name": "keyword.operand.ld",
+                    "match": "\\?|\\:"
                 },
                 {
-                    "name":"support.function.builtin.ld",
-                    "match":{
-                        "(?x) \\b(?":"",
-                        "0":"ABSOLUTE",
-                        "1":"|ADDR",
-                        "2":"|ALIGN",
-                        "3":"|BLOCK",
-                        "4":"|DATA_SEGMENT_ALIGN",
-                        "5":"|DATA_SEGMENT_END",
-                        "6":"|DEFINED",
-                        "7":"|LOADADDR",
-                        "8":"|MAX",
-                        "9":"|MIN",
-                        "10":"|NEXT",
-                        "11":"|SIZEOF",
-                        "12":"|SIZEOF_HEADERS",
-                        "13":"|sizeof_headers",
-                        "14":")\\b"
-                    }
+                    "name": "support.function.builtin.ld",
+                    "match": "(?x) \\b(?: ABSOLUTE |ADDR |ALIGN |BLOCK |DATA_SEGMENT_ALIGN |DATA_SEGMENT_END |DEFINED |LOADADDR |MAX |MIN |NEXT |SIZEOF |SIZEOF_HEADERS |sizeof_headers )\\b"
                 }
             ]
         }

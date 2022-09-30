@@ -82,10 +82,6 @@ repository:
           '3':
             name: variable.other.ld
       # section output pre part
-      # TODO: `\s` does not match `linebreak` yet, not sure how to fix
-      #       it seems `multiline` mode is not on, but `(?m)` does not work
-      #       maybe related: https://github.com/Microsoft/vscode/issues/13155
-      #       see if repgrep will support multiline mode
       - name: section.output.prepart.ld
         match: '(?mx) (\B\.[\.\*\w]+\b)(?:\s*)(\w*)(?:\s*)((\(\s*[\w]*\s*\))?)(?:\s*)(\:)(?:\s*)((AT)?)(?:\s*\(?)(\w*)(?:\s*\)?)'
         captures:

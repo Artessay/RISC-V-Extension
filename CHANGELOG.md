@@ -1,9 +1,9 @@
 # Change Log
 
-## 0.0.2
+## 0.0.3
 
-- rearrange catogory
-- new icon used
+- add linker script support
+- more comment syntax hightlight
 
 ## 0.0.2
 
