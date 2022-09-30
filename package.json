@@ -1,7 +1,7 @@
 {
 	"name": "riscv-extension",
 	"displayName": "RISC-V Extension",
-	"description": "RISC-V operating system development extension",
+	"description": "RISC-V Operating System development extension",
 	"version": "0.0.3",
 	"publisher": "rihong",
 	"engines": {
@@ -30,8 +30,8 @@
 			{
 				"id": "linkerscript",
 				"aliases": [
-					"linkerscript",
-					"LinkerScript"
+					"Linker Script",
+					"linkerscript"
 				],
 				"extensions": [
 					".ld",
