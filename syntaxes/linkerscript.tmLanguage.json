@@ -2,342 +2,594 @@
     "name": "LinkerScript",
     "scopeName": "source.ld",
     "fileTypes": [
-        "ld"
+      "ld"
     ],
     "patterns": [
-        {
-            "include": "#comments"
-        },
-        {
-            "include": "#simple_commands"
-        },
-        {
-            "include": "#assignments"
-        },
-        {
-            "include": "#sections"
-        },
-        {
-            "include": "#memory"
-        },
-        {
-            "include": "#phdrs"
-        },
-        {
-            "include": "#version"
-        },
-        {
-            "include": "#expressions"
-        }
+      {
+        "include": "#comments"
+      },
+      {
+        "include": "#simple_commands"
+      },
+      {
+        "include": "#assignments"
+      },
+      {
+        "include": "#sections"
+      },
+      {
+        "include": "#memory"
+      },
+      {
+        "include": "#phdrs"
+      },
+      {
+        "include": "#version"
+      },
+      {
+        "include": "#expressions"
+      },
+      {
+        "include": "#numberLiterals"
+      },
+      {
+        "include": "#stringLiterals"
+      }
     ],
     "repository": {
-        "comments": {
-            "name": "comment.block.ld",
-            "begin": "/\\*",
-            "beginCaptures": {
-                "0": {
-                    "name": "punctuation.definition.comment.begin.ld"
-                }
-            },
-            "end": "\\*/",
-            "endCaptures": {
-                "0": {
-                    "name": "punctuation.definition.comment.end.ld"
-                }
-            }
+      "comments": {
+        "name": "comment.block.ld",
+        "begin": "/\\*",
+        "beginCaptures": {
+          "0": {
+            "name": "punctuation.definition.comment.begin.ld"
+          }
         },
-        "simple_commands": {
-            "patterns": [
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?: ENTRY )\\b"
-                },
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?: INCLUDE |INPUT |GROUP |OUTPUT |SEARCH_DIR |STARTUP )\\b"
-                },
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?: OUTPUT_FORMAT |TARGET )\\b"
-                },
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?: ASSERT |EXTERN |FORCE_COMMON_ALLOCATION |INHIBIT_COMMON_ALLOCATION |NOCROSSREFS |OUTPUT_ARCH )\\b"
-                }
-            ]
-        },
-        "assignments": {
-            "patterns": [
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "=|\\+=|-=|\\*=|/=|<<=|>>=|&=|\\|="
-                },
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?: PROVIDE |HIDDEN |PROVIDE_HIDDEN )\\b"
-                }
-            ]
-        },
-        "sections": {
-            "patterns": [
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?:SECTIONS)\\b"
-                },
-                {
-                    "name": "section.input.ld",
-                    "match": "(?x) (\\S+)((?:\\s*\\(\\s*)(((\\.[\\.\\*\\w]+)(?:\\s*))+)(?:\\s*\\)))",
-                    "captures": {
-                        "1": {
-                            "name": "support.function.builtin.ld"
-                        },
-                        "3": {
-                            "name": "variable.other.ld"
-                        }
-                    }
-                },
-                {
-                    "name": "section.output.prepart.ld",
-                    "match": "(?mx) (\\B\\.[\\.\\*\\w]+\\b)(?:\\s*)(\\w*)(?:\\s*)((\\(\\s*[\\w]*\\s*\\))?)(?:\\s*)(\\:)(?:\\s*)((AT)?)(?:\\s*\\(?)(\\w*)(?:\\s*\\)?)",
-                    "captures": {
-                        "1": {
-                            "name": "variable.other.ld"
-                        },
-                        "2": {
-                            "name": "constant.numeric.ld"
-                        },
-                        "4": {
-                            "name": "keyword.control.ld"
-                        },
-                        "5": {
-                            "name": "keyword.operand.ld"
-                        },
-                        "7": {
-                            "name": "support.function.builtin.ld"
-                        },
-                        "8": {
-                            "name": "constant.numeric.ld"
-                        }
-                    }
-                },
-                {
-                    "name": "section.output.postpart.ld",
-                    "match": "(?:\\}\\s*)((\\>)(\\s*\\w*)?)(?:\\s*)((AT)(?:\\s*)(\\>)(?:\\s*)(\\w*))?(?:\\s*)(((\\:\\w*)(?:\\s*))*)(((\\=)(?:\\s*)(\\w*))?)",
-                    "captures": {
-                        "2": {
-                            "name": "keyword.operand.ld"
-                        },
-                        "3": {
-                            "name": "variable.other.ld"
-                        },
-                        "5": {
-                            "name": "support.function.builtin.ld"
-                        },
-                        "6": {
-                            "name": "keyword.operand.ld"
-                        },
-                        "7": {
-                            "name": "variable.other.ld"
-                        },
-                        "8": {
-                            "name": "keyword.control.ld"
-                        },
-                        "13": {
-                            "name": "keyword.operand.ld"
-                        },
-                        "14": {
-                            "name": "constant.numeric.ld"
-                        }
-                    }
-                },
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?: EXCLUDE_FILE |CREATE_OBJECT_SYMBOLS |CONSTRUCTORS )\\b"
-                },
-                {
-                    "name": "datatypes.ld",
-                    "match": "(?x) (BYTE|SHORT|LONG|QUAD|SQUAD)(?:\\s*\\(\\s*)([^\\(\\)]*)(?:\\s*\\))",
-                    "captures": {
-                        "1": {
-                            "name": "support.type.ld"
-                        },
-                        "2": {
-                            "name": "constant.numeric.ld"
-                        }
-                    }
-                },
-                {
-                    "name": "section.discard.ld",
-                    "match": "(/DISCARD/)(?:\\s*)(\\:)",
-                    "captures": {
-                        "1": {
-                            "name": "variable.other.ld"
-                        },
-                        "2": {
-                            "name": "keyword.operand.ld"
-                        }
-                    }
-                }
-            ]
-        },
-        "memory": {
-            "patterns": [
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?:MEMORY)\\b"
-                },
-                {
-                    "name": "memory.config.ld",
-                    "match": "(\\S*)(?:\\s*\\(\\s*)((R|r|W|w|X|x|A|a|I|i|L|l|\\!)+)(?:\\s*\\)\\s*)(\\:)((?:\\s*)(ORIGIN|org|o|LENGTH|len|l)(?:\\s*)(\\=)(?:\\s*)(\\w*)(,?))((?:\\s*)(ORIGIN|org|o|LENGTH|len|l)(?:\\s*)(\\=)(?:\\s*)(\\w*))",
-                    "captures": {
-                        "1": {
-                            "name": "variable.other.ld"
-                        },
-                        "2": {
-                            "name": "keyword.control.ld"
-                        },
-                        "4": {
-                            "name": "keyword.operand.ld"
-                        },
-                        "6": {
-                            "name": "support.variable.ld"
-                        },
-                        "7": {
-                            "name": "keyword.operand.ld"
-                        },
-                        "8": {
-                            "name": "constant.numeric.ld"
-                        },
-                        "11": {
-                            "name": "support.variable.ld"
-                        },
-                        "12": {
-                            "name": "keyword.operand.ld"
-                        },
-                        "13": {
-                            "name": "constant.numeric.ld"
-                        }
-                    }
-                },
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?: LENGTH |len |l |ORIGIN |org |o )\\b"
-                }
-            ]
-        },
-        "phdrs": {
-            "patterns": [
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?:PHDRS)\\b"
-                },
-                {
-                    "name": "phdrs.config.ld",
-                    "match": "(\\w*)(?:\\s*)(PT_NULL|PT_LOAD|PT_DYNAMIC|PT_INTERP|PT_NOTE|PT_SHLIB|PT_PHDR)(?:\\s*)((FILEHDR)?)(?:\\s*)((PHDRS)?)(?:\\s*)((((AT)?)(?:\\s*\\(\\s*)(\\w*)(?:\\s*\\)\\s*))?)((((FLAGS)?)(?:\\s*\\(\\s*)(\\w*)(?:\\s*\\)\\s*))?)(\\;)",
-                    "captures": {
-                        "1": {
-                            "name": "variable.other.ld"
-                        },
-                        "2": {
-                            "name": "constant.numeric.ld"
-                        },
-                        "4": {
-                            "name": "keyword.control.ld"
-                        },
-                        "6": {
-                            "name": "keyword.control.ld"
-                        },
-                        "10": {
-                            "name": "support.function.builtin.ld"
-                        },
-                        "11": {
-                            "name": "constant.numeric.ld"
-                        },
-                        "15": {
-                            "name": "support.function.builtin.ld"
-                        },
-                        "16": {
-                            "name": "constant.numeric.ld"
-                        }
-                    }
-                }
-            ]
-        },
-        "version": {
-            "patterns": [
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?:VERSION)\\b"
-                }
-            ]
-        },
-        "expressions": {
-            "patterns": [
-                {
-                    "name": "expression.ld",
-                    "match": "(\\w*)(?:\\s*)(=|\\+=|-=|\\*=|/=|<<=|>>=|&=|\\|=)",
-                    "captures": {
-                        "1": {
-                            "name": "variable.other.ld"
-                        },
-                        "2": {
-                            "name": "keyword.operand.ld"
-                        }
-                    }
-                },
-                {
-                    "name": "constant.numeric.ld",
-                    "match": "(?x) \\b(?:(MAXPAGESIZE)|(COMMONPAGESIZE))\\b"
-                },
-                {
-                    "name": "variable.other.ld",
-                    "match": "\\."
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "!|-|~"
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "\\*|/|%"
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "\\+|\\-"
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "<<|>>"
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "==|!=|>|<|>=|<="
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "&"
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "\\|"
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "&&"
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "\\|\\|"
-                },
-                {
-                    "name": "keyword.operand.ld",
-                    "match": "\\?|\\:"
-                },
-                {
-                    "name": "support.function.builtin.ld",
-                    "match": "(?x) \\b(?: ABSOLUTE |ADDR |ALIGN |BLOCK |DATA_SEGMENT_ALIGN |DATA_SEGMENT_END |DEFINED |LOADADDR |MAX |MIN |NEXT |SIZEOF |SIZEOF_HEADERS |sizeof_headers )\\b"
-                }
-            ]
+        "end": "\\*/",
+        "endCaptures": {
+          "0": {
+            "name": "punctuation.definition.comment.end.ld"
+          }
         }
+      },
+      "simple_commands": {
+        "patterns": [
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?: ENTRY )\\b"
+          },
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?: INCLUDE |INPUT |GROUP |OUTPUT |SEARCH_DIR |STARTUP )\\b"
+          },
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?: OUTPUT_FORMAT |TARGET )\\b"
+          },
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?: ASSERT |EXTERN |FORCE_COMMON_ALLOCATION |INHIBIT_COMMON_ALLOCATION |NOCROSSREFS |OUTPUT_ARCH )\\b"
+          }
+        ]
+      },
+      "assignments": {
+        "patterns": [
+          {
+            "name": "keyword.operand.ld",
+            "match": "=|\\+=|-=|\\*=|/=|<<=|>>=|&=|\\|="
+          },
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?: PROVIDE |HIDDEN |PROVIDE_HIDDEN )\\b"
+          }
+        ]
+      },
+      "sections": {
+        "patterns": [
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?:SECTIONS)\\b"
+          },
+          {
+            "name": "section.input.ld",
+            "match": "(?x) (\\S+)((?:\\s*\\(\\s*)(((\\.[\\.\\*\\w]+)(?:\\s*))+)(?:\\s*\\)))",
+            "captures": {
+              "1": {
+                "name": "support.function.builtin.ld"
+              },
+              "3": {
+                "name": "variable.other.ld"
+              }
+            }
+          },
+          {
+            "name": "section.output.prepart.ld",
+            "match": "(?mx) (\\B\\.[\\.\\*\\w]+\\b)(?:\\s*)(\\w*)(?:\\s*)((\\(\\s*[\\w]*\\s*\\))?)(?:\\s*)(\\:)(?:\\s*)((AT)?)(?:\\s*\\(?)(\\w*)(?:\\s*\\)?)",
+            "captures": {
+              "1": {
+                "name": "variable.other.ld"
+              },
+              "2": {
+                "name": "constant.numeric.ld"
+              },
+              "4": {
+                "name": "keyword.control.ld"
+              },
+              "5": {
+                "name": "keyword.operand.ld"
+              },
+              "7": {
+                "name": "support.function.builtin.ld"
+              },
+              "8": {
+                "name": "constant.numeric.ld"
+              }
+            }
+          },
+          {
+            "name": "section.output.postpart.ld",
+            "match": "(?:\\}\\s*)((\\>)(\\s*\\w*)?)(?:\\s*)((AT)(?:\\s*)(\\>)(?:\\s*)(\\w*))?(?:\\s*)(((\\:\\w*)(?:\\s*))*)(((\\=)(?:\\s*)(\\w*))?)",
+            "captures": {
+              "2": {
+                "name": "keyword.operand.ld"
+              },
+              "3": {
+                "name": "variable.other.ld"
+              },
+              "5": {
+                "name": "support.function.builtin.ld"
+              },
+              "6": {
+                "name": "keyword.operand.ld"
+              },
+              "7": {
+                "name": "variable.other.ld"
+              },
+              "8": {
+                "name": "keyword.control.ld"
+              },
+              "13": {
+                "name": "keyword.operand.ld"
+              },
+              "14": {
+                "name": "constant.numeric.ld"
+              }
+            }
+          },
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?: EXCLUDE_FILE |CREATE_OBJECT_SYMBOLS |CONSTRUCTORS )\\b"
+          },
+          {
+            "name": "datatypes.ld",
+            "match": "(?x) (BYTE|SHORT|LONG|QUAD|SQUAD)(?:\\s*\\(\\s*)([^\\(\\)]*)(?:\\s*\\))",
+            "captures": {
+              "1": {
+                "name": "support.type.ld"
+              },
+              "2": {
+                "name": "constant.numeric.ld"
+              }
+            }
+          },
+          {
+            "name": "section.discard.ld",
+            "match": "(/DISCARD/)(?:\\s*)(\\:)",
+            "captures": {
+              "1": {
+                "name": "variable.other.ld"
+              },
+              "2": {
+                "name": "keyword.operand.ld"
+              }
+            }
+          }
+        ]
+      },
+      "memory": {
+        "patterns": [
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?:MEMORY)\\b"
+          },
+          {
+            "name": "memory.config.ld",
+            "match": "(\\S*)(?:\\s*\\(\\s*)((R|r|W|w|X|x|A|a|I|i|L|l|\\!)+)(?:\\s*\\)\\s*)(\\:)((?:\\s*)(ORIGIN|org|o|LENGTH|len|l)(?:\\s*)(\\=)(?:\\s*)(\\w*)(,?))((?:\\s*)(ORIGIN|org|o|LENGTH|len|l)(?:\\s*)(\\=)(?:\\s*)(\\w*))",
+            "captures": {
+              "1": {
+                "name": "variable.other.ld"
+              },
+              "2": {
+                "name": "keyword.control.ld"
+              },
+              "4": {
+                "name": "keyword.operand.ld"
+              },
+              "6": {
+                "name": "support.variable.ld"
+              },
+              "7": {
+                "name": "keyword.operand.ld"
+              },
+              "8": {
+                "name": "constant.numeric.ld"
+              },
+              "11": {
+                "name": "support.variable.ld"
+              },
+              "12": {
+                "name": "keyword.operand.ld"
+              },
+              "13": {
+                "name": "constant.numeric.ld"
+              }
+            }
+          },
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?: LENGTH |len |l |ORIGIN |org |o )\\b"
+          }
+        ]
+      },
+      "phdrs": {
+        "patterns": [
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?:PHDRS)\\b"
+          },
+          {
+            "name": "phdrs.config.ld",
+            "match": "(\\w*)(?:\\s*)(PT_NULL|PT_LOAD|PT_DYNAMIC|PT_INTERP|PT_NOTE|PT_SHLIB|PT_PHDR)(?:\\s*)((FILEHDR)?)(?:\\s*)((PHDRS)?)(?:\\s*)((((AT)?)(?:\\s*\\(\\s*)(\\w*)(?:\\s*\\)\\s*))?)((((FLAGS)?)(?:\\s*\\(\\s*)(\\w*)(?:\\s*\\)\\s*))?)(\\;)",
+            "captures": {
+              "1": {
+                "name": "variable.other.ld"
+              },
+              "2": {
+                "name": "constant.numeric.ld"
+              },
+              "4": {
+                "name": "keyword.control.ld"
+              },
+              "6": {
+                "name": "keyword.control.ld"
+              },
+              "10": {
+                "name": "support.function.builtin.ld"
+              },
+              "11": {
+                "name": "constant.numeric.ld"
+              },
+              "15": {
+                "name": "support.function.builtin.ld"
+              },
+              "16": {
+                "name": "constant.numeric.ld"
+              }
+            }
+          }
+        ]
+      },
+      "version": {
+        "patterns": [
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?:VERSION)\\b"
+          }
+        ]
+      },
+      "expressions": {
+        "patterns": [
+          {
+            "name": "expression.ld",
+            "match": "(\\w*)(?:\\s*)(=|\\+=|-=|\\*=|/=|<<=|>>=|&=|\\|=)",
+            "captures": {
+              "1": {
+                "name": "variable.other.ld"
+              },
+              "2": {
+                "name": "keyword.operand.ld"
+              }
+            }
+          },
+          {
+            "name": "constant.numeric.ld",
+            "match": "(?x) \\b(?:(MAXPAGESIZE)|(COMMONPAGESIZE))\\b"
+          },
+          {
+            "name": "variable.other.ld",
+            "match": "\\."
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "!|-|~"
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "\\*|/|%"
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "\\+|\\-"
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "<<|>>"
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "==|!=|>|<|>=|<="
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "&"
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "\\|"
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "&&"
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "\\|\\|"
+          },
+          {
+            "name": "keyword.operand.ld",
+            "match": "\\?|\\:"
+          },
+          {
+            "name": "support.function.builtin.ld",
+            "match": "(?x) \\b(?: ABSOLUTE |ADDR |ALIGN |BLOCK |DATA_SEGMENT_ALIGN |DATA_SEGMENT_END |DEFINED |LOADADDR |MAX |MIN |NEXT |SIZEOF |SIZEOF_HEADERS |sizeof_headers )\\b"
+          }
+        ]
+      },
+      "numberLiterals": {
+        "patterns": [
+          {
+            "include": "#hexadecimalInteger"
+          },
+          {
+            "include": "#hexadecimalFloat"
+          },
+          {
+            "include": "#hexadecimalFloatFromExp"
+          },
+          {
+            "include": "#decimalInteger"
+          },
+          {
+            "include": "#decimalFloat"
+          },
+          {
+            "include": "#decimalFloatFromExp"
+          },
+          {
+            "include": "#octalInteger"
+          },
+          {
+            "include": "#binaryInteger"
+          },
+          {
+            "include": "#invalidNumberPrecheck"
+          }
+        ]
+      },
+      "hexadecimalInteger": {
+        "name": "constant.numeric.hexadecimal.ld",
+        "match": "(?x)(?<!\\w) (0x|0x) (?:\n    [0-9a-fA-F](?:'?[0-9a-fA-F])*\n) (?:\n    ((?:u|U)(?:ll|LL|l|L|z|Z)?|(?:ll|LL|l|L|z|Z)(?:u|U)?)\\b|\n    ([a-zA-Z_][0-9a-zA-Z_]*)\n)?\n",
+        "captures": {
+          "1": {
+            "name": "keyword.other.unit.hexadecimal.ld"
+          },
+          "2": {
+            "name": "keyword.other.unit.suffix.integer.ld"
+          },
+          "3": {
+            "name": "keyword.other.unit.suffix.user-defined.ld"
+          }
+        }
+      },
+      "hexadecimalFloat": {
+        "name": "constant.numeric.hexadecimal.ld",
+        "match": "(?x)(?<!\\w) (0x|0X) (?:\n    [0-9a-fA-F](?:'?[0-9a-fA-F])*\\.[0-9a-fA-F](?:'?[0-9a-fA-F])*|\n    \\.[0-9a-fA-F](?:'?[0-9a-fA-F])*|\n    [0-9a-fA-F](?:'?[0-9a-fA-F])*\\.\n) (\n    [pP][+-]?[0-9]+\n) (?:\n    ([fFlL])\\b|\n    ([a-zA-Z_][0-9a-zA-Z_]*)\n)?\n",
+        "captures": {
+          "1": {
+            "name": "keyword.other.unit.hexadecimal.ld"
+          },
+          "2": {
+            "name": "constant.numeric.exponent.hexadecimal.ld"
+          },
+          "3": {
+            "name": "keyword.other.unit.suffix.floating-point.ld"
+          },
+          "4": {
+            "name": "keyword.other.unit.suffix.user-defined.ld"
+          }
+        }
+      },
+      "hexadecimalFloatFromExp": {
+        "name": "constant.numeric.hexadecimal.ld",
+        "match": "(?x)(?<!\\w) (0x|0X) (?:\n    [0-9a-fA-F](?:'?[0-9a-fA-F])*\n) (\n    [pP][+-]?[0-9]+\n) (?:\n    ([fFlL])\\b|\n    ([a-zA-Z_][0-9a-zA-Z_]*)\n)?\n",
+        "captures": {
+          "1": {
+            "name": "keyword.other.unit.hexadecimal.ld"
+          },
+          "2": {
+            "name": "constant.numeric.exponent.hexadecimal.ld"
+          },
+          "3": {
+            "name": "keyword.other.unit.suffix.floating-point.ld"
+          },
+          "4": {
+            "name": "keyword.other.unit.suffix.user-defined.ld"
+          }
+        }
+      },
+      "decimalInteger": {
+        "name": "constant.numeric.decimal.ld",
+        "match": "(?x)(?<!\\w) (?:\n    [1-9](?:'?[0-9])*|0\n) (?:\n    ((?:u|U)(?:ll|LL|l|L|z|Z)?|(?:ll|LL|l|L|z|Z)(?:u|U)?)\\b|\n    ([a-zA-Z_][0-9a-zA-Z_]*)\n)?\n",
+        "captures": {
+          "1": {
+            "name": "keyword.other.unit.suffix.integer.ld"
+          },
+          "2": {
+            "name": "keyword.other.unit.suffix.user-defined.ld"
+          }
+        }
+      },
+      "decimalFloat": {
+        "name": "constant.numeric.decimal.ld",
+        "match": "(?x)(?<!\\w) (?:\n    [0-9](?:'?[0-9])*\\.[0-9](?:'?[0-9])*|\n    \\.[0-9](?:'?[0-9])*|\n    [0-9](?:'?[0-9])*\\.\n) (\n    [eE][+-]?[0-9]+\n)? (?:\n    ([fFlL])\\b|\n    ([a-zA-Z_][0-9a-zA-Z_]*)\n)?\n",
+        "captures": {
+          "1": {
+            "name": "constant.numeric.exponent.decimal.ld"
+          },
+          "2": {
+            "name": "keyword.other.unit.suffix.floating-point.ld"
+          },
+          "3": {
+            "name": "keyword.other.unit.suffix.user-defined.ld"
+          }
+        }
+      },
+      "decimalFloatFromExp": {
+        "name": "constant.numeric.decimal.ld",
+        "match": "(?x)(?<!\\w) (?:\n    [0-9](?:'?[0-9])*\n) (\n    [eE][+-]?[0-9]+\n) (?:\n    ([fFlL])\\b|\n    ([a-zA-Z_][0-9a-zA-Z_]*)\n)?\n",
+        "captures": {
+          "1": {
+            "name": "constant.numeric.exponent.decimal.ld"
+          },
+          "2": {
+            "name": "keyword.other.unit.suffix.floating-point.ld"
+          },
+          "3": {
+            "name": "keyword.other.unit.suffix.user-defined.ld"
+          }
+        }
+      },
+      "octalInteger": {
+        "name": "constant.numeric.octal.ld",
+        "match": "(?x)(?<!\\w) (0) (?:\n    [0-7](?:'?[0-7])*\n) (?:\n    ((?:u|U)(?:ll|LL|l|L|z|Z)?|(?:ll|LL|l|L|z|Z)(?:u|U)?)\\b|\n    ([a-zA-Z_][0-9a-zA-Z_]*)\n)?\n",
+        "captures": {
+          "1": {
+            "name": "keyword.other.unit.octal.ld"
+          },
+          "2": {
+            "name": "keyword.other.unit.suffix.integer.ld"
+          },
+          "3": {
+            "name": "keyword.other.unit.suffix.user-defined.ld"
+          }
+        }
+      },
+      "binaryInteger": {
+        "name": "constant.numeric.binary.ld",
+        "match": "(?x)(?<!\\w) (0b|0B) (?:\n    [0-1](?:'?[0-1])*\n) (?:\n    ((?:u|U)(?:ll|LL|l|L|z|Z)?|(?:ll|LL|l|L|z|Z)(?:u|U)?)\\b|\n    ([a-zA-Z_][0-9a-zA-Z_]*)\n)?\n",
+        "captures": {
+          "1": {
+            "name": "keyword.other.unit.binary.ld"
+          },
+          "2": {
+            "name": "keyword.other.unit.suffix.integer.ld"
+          },
+          "3": {
+            "name": "keyword.other.unit.suffix.user-defined.ld"
+          }
+        }
+      },
+      "invalidNumberPrecheck": {
+        "name": "invalid.illegal.constant.numeric.ld",
+        "match": "(?x)(?<!\\w) (?:\n    (?:0b|0B)[2-9][0-9']*|\n    (?:0b|0B)[0-1](?:'?[0-1])*'?[2-9][0-9']*|\n    (?:0b|0B)(?![0-1])|\n    0'?[8-9][0-9']*|\n    0'?[0-7](?:'?[0-7])*'?[8-9][0-9']*|\n    (?:0x|0X)[0-9a-fA-F]*\\.[0-9a-fA-F]*+(?![pP])\n)\n"
+      },
+      "stringLiterals": {
+        "patterns": [
+          {
+            "include": "#stringSingle"
+          },
+          {
+            "include": "#stringDouble"
+          },
+          {
+            "include": "#stringDoubleRaw"
+          }
+        ]
+      },
+      "stringSingle": {
+        "name": "string.quoted.single.ld",
+        "begin": "(u|u8|U|L)?\\'",
+        "end": "\\'",
+        "patterns": [
+          {
+            "include": "#escapeCharacter"
+          }
+        ]
+      },
+      "stringDoubleRaw": {
+        "name": "string.quoted.double.raw.ld",
+        "begin": "(u|u8|U|L)?R\\\"[^\\(\\)\\\\\\s]{0,16}\\(",
+        "end": "\\)[^\\(\\)\\\\\\s]{0,16}\\\"",
+        "beginCaptures": {
+          "0": {
+            "name": "punctuation.definition.string.begin.ld"
+          },
+          "1": {
+            "name": "meta.encoding.ld"
+          }
+        },
+        "endCaptures": {
+          "0": {
+            "name": "punctuation.definition.string.end.ld"
+          }
+        }
+      },
+      "stringDouble": {
+        "name": "string.quoted.double.ld",
+        "begin": "(u|u8|U|L)?\\\"",
+        "end": "\\\"",
+        "beginCaptures": {
+          "0": {
+            "name": "punctuation.definition.string.begin.ld"
+          },
+          "1": {
+            "name": "meta.encoding.ld"
+          }
+        },
+        "endCaptures": {
+          "0": {
+            "name": "punctuation.definition.string.end.ld"
+          }
+        },
+        "patterns": [
+          {
+            "include": "#escapeCharacter"
+          }
+        ]
+      },
+      "escapeCharacter": {
+        "patterns": [
+          {
+            "name": "constant.character.escape",
+            "match": "\\\\[0-8]{1,3}"
+          },
+          {
+            "name": "constant.character.escape",
+            "match": "\\\\x([0-9a-fA-F]{2})+"
+          },
+          {
+            "name": "constant.character.escape",
+            "match": "\\\\u[0-9a-fA-F]{4}"
+          },
+          {
+            "name": "constant.character.escape",
+            "match": "\\\\U[0-9a-fA-F]{8}"
+          },
+          {
+            "name": "constant.character.escape",
+            "match": "(\\\\['\"?\\\\abfnrtv])"
+          }
+        ]
+      }
     }
-}
+  }

@@ -10,6 +10,8 @@ patterns:
   - include: '#phdrs'
   - include: '#version'
   - include: '#expressions'
+  - include: '#numberLiterals'
+  - include: '#stringLiterals'
 repository:
   comments:
     name: comment.block.ld
@@ -265,3 +267,224 @@ repository:
           |SIZEOF_HEADERS
           |sizeof_headers
           )\b
+
+  numberLiterals:
+    # number literals
+    patterns:
+      - include: '#hexadecimalInteger'
+      - include: '#hexadecimalFloat'
+      - include: '#hexadecimalFloatFromExp'
+      - include: '#decimalInteger'
+      - include: '#decimalFloat'
+      - include: '#decimalFloatFromExp'
+      - include: '#octalInteger'
+      - include: '#binaryInteger'
+      - include: '#invalidNumberPrecheck'
+  # hexadecimal number
+  hexadecimalInteger:
+    name: constant.numeric.hexadecimal.ld
+    match: |
+      (?x)(?<!\w) (0x|0x) (?:
+          [0-9a-fA-F](?:'?[0-9a-fA-F])*
+      ) (?:
+          ((?:u|U)(?:ll|LL|l|L|z|Z)?|(?:ll|LL|l|L|z|Z)(?:u|U)?)\b|
+          ([a-zA-Z_][0-9a-zA-Z_]*)
+      )?
+    captures:
+      '1':
+        name: keyword.other.unit.hexadecimal.ld
+      '2':
+        name: keyword.other.unit.suffix.integer.ld
+      '3':
+        name: keyword.other.unit.suffix.user-defined.ld
+  hexadecimalFloat:
+    name: constant.numeric.hexadecimal.ld
+    match: |
+      (?x)(?<!\w) (0x|0X) (?:
+          [0-9a-fA-F](?:'?[0-9a-fA-F])*\.[0-9a-fA-F](?:'?[0-9a-fA-F])*|
+          \.[0-9a-fA-F](?:'?[0-9a-fA-F])*|
+          [0-9a-fA-F](?:'?[0-9a-fA-F])*\.
+      ) (
+          [pP][+-]?[0-9]+
+      ) (?:
+          ([fFlL])\b|
+          ([a-zA-Z_][0-9a-zA-Z_]*)
+      )?
+    captures:
+      '1':
+        name: keyword.other.unit.hexadecimal.ld
+      '2':
+        name: constant.numeric.exponent.hexadecimal.ld
+      '3':
+        name: keyword.other.unit.suffix.floating-point.ld
+      '4':
+        name: keyword.other.unit.suffix.user-defined.ld
+  hexadecimalFloatFromExp:
+    name: constant.numeric.hexadecimal.ld
+    match: |
+      (?x)(?<!\w) (0x|0X) (?:
+          [0-9a-fA-F](?:'?[0-9a-fA-F])*
+      ) (
+          [pP][+-]?[0-9]+
+      ) (?:
+          ([fFlL])\b|
+          ([a-zA-Z_][0-9a-zA-Z_]*)
+      )?
+    captures:
+      '1':
+        name: keyword.other.unit.hexadecimal.ld
+      '2':
+        name: constant.numeric.exponent.hexadecimal.ld
+      '3':
+        name: keyword.other.unit.suffix.floating-point.ld
+      '4':
+        name: keyword.other.unit.suffix.user-defined.ld
+  # decimal number
+  decimalInteger:
+    name: constant.numeric.decimal.ld
+    match: |
+      (?x)(?<!\w) (?:
+          [1-9](?:'?[0-9])*|0
+      ) (?:
+          ((?:u|U)(?:ll|LL|l|L|z|Z)?|(?:ll|LL|l|L|z|Z)(?:u|U)?)\b|
+          ([a-zA-Z_][0-9a-zA-Z_]*)
+      )?
+    captures:
+      '1':
+        name: keyword.other.unit.suffix.integer.ld
+      '2':
+        name: keyword.other.unit.suffix.user-defined.ld
+  decimalFloat:
+    name: constant.numeric.decimal.ld
+    match: |
+      (?x)(?<!\w) (?:
+          [0-9](?:'?[0-9])*\.[0-9](?:'?[0-9])*|
+          \.[0-9](?:'?[0-9])*|
+          [0-9](?:'?[0-9])*\.
+      ) (
+          [eE][+-]?[0-9]+
+      )? (?:
+          ([fFlL])\b|
+          ([a-zA-Z_][0-9a-zA-Z_]*)
+      )?
+    captures:
+      '1':
+        name: constant.numeric.exponent.decimal.ld
+      '2':
+        name: keyword.other.unit.suffix.floating-point.ld
+      '3':
+        name: keyword.other.unit.suffix.user-defined.ld
+  decimalFloatFromExp:
+    name: constant.numeric.decimal.ld
+    match: |
+      (?x)(?<!\w) (?:
+          [0-9](?:'?[0-9])*
+      ) (
+          [eE][+-]?[0-9]+
+      ) (?:
+          ([fFlL])\b|
+          ([a-zA-Z_][0-9a-zA-Z_]*)
+      )?
+    captures:
+      '1':
+        name: constant.numeric.exponent.decimal.ld
+      '2':
+        name: keyword.other.unit.suffix.floating-point.ld
+      '3':
+        name: keyword.other.unit.suffix.user-defined.ld
+  # octal integer
+  octalInteger:
+    name: constant.numeric.octal.ld
+    match: |
+      (?x)(?<!\w) (0) (?:
+          [0-7](?:'?[0-7])*
+      ) (?:
+          ((?:u|U)(?:ll|LL|l|L|z|Z)?|(?:ll|LL|l|L|z|Z)(?:u|U)?)\b|
+          ([a-zA-Z_][0-9a-zA-Z_]*)
+      )?
+    captures:
+      '1':
+        name: keyword.other.unit.octal.ld
+      '2':
+        name: keyword.other.unit.suffix.integer.ld
+      '3':
+        name: keyword.other.unit.suffix.user-defined.ld
+  # binary integer
+  binaryInteger:
+    name: constant.numeric.binary.ld
+    match: |
+      (?x)(?<!\w) (0b|0B) (?:
+          [0-1](?:'?[0-1])*
+      ) (?:
+          ((?:u|U)(?:ll|LL|l|L|z|Z)?|(?:ll|LL|l|L|z|Z)(?:u|U)?)\b|
+          ([a-zA-Z_][0-9a-zA-Z_]*)
+      )?
+    captures:
+      '1':
+        name: keyword.other.unit.binary.ld
+      '2':
+        name: keyword.other.unit.suffix.integer.ld
+      '3':
+        name: keyword.other.unit.suffix.user-defined.ld
+  # precheck invalid number  
+  invalidNumberPrecheck:
+    name: invalid.illegal.constant.numeric.ld
+    match: |
+      (?x)(?<!\w) (?:
+          (?:0b|0B)[2-9][0-9']*|
+          (?:0b|0B)[0-1](?:'?[0-1])*'?[2-9][0-9']*|
+          (?:0b|0B)(?![0-1])|
+          0'?[8-9][0-9']*|
+          0'?[0-7](?:'?[0-7])*'?[8-9][0-9']*|
+          (?:0x|0X)[0-9a-fA-F]*\.[0-9a-fA-F]*+(?![pP])
+      )
+  
+  stringLiterals:
+    patterns:
+      - include: '#stringSingle'
+      - include: '#stringDouble'
+      - include: '#stringDoubleRaw'
+  stringSingle:
+    name: string.quoted.single.ld
+    begin: (u|u8|U|L)?\'
+    end: \'
+    patterns:
+      - include: '#escapeCharacter'
+  stringDoubleRaw:
+    name: string.quoted.double.raw.ld
+    begin: '(u|u8|U|L)?R\"[^\(\)\\\s]{0,16}\('
+    end: '\)[^\(\)\\\s]{0,16}\"'
+    beginCaptures:
+      '0':
+        name: punctuation.definition.string.begin.ld
+      '1':
+        name: meta.encoding.ld
+    endCaptures:
+      '0':
+        name: punctuation.definition.string.end.ld
+  stringDouble:
+    name: string.quoted.double.ld
+    begin: (u|u8|U|L)?\"
+    end: \"
+    beginCaptures:
+      '0':
+        name: punctuation.definition.string.begin.ld
+      '1':
+        name: meta.encoding.ld
+    endCaptures:
+      '0':
+        name: punctuation.definition.string.end.ld
+    patterns:
+      - include: '#escapeCharacter'
+  escapeCharacter:
+    patterns:
+      - name: constant.character.escape
+        match: '\\[0-8]{1,3}'
+      - name: constant.character.escape
+        match: '\\x([0-9a-fA-F]{2})+'
+      - name: constant.character.escape
+        match: '\\u[0-9a-fA-F]{4}'
+      - name: constant.character.escape
+        match: '\\U[0-9a-fA-F]{8}'
+      - name: constant.character.escape
+        match: '(\\[''"?\\abfnrtv])'
