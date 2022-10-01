@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.0.4
+
+- improve readme document
+- decrease the limitation of Visual Studio Code version
+- include some examples in the samples folder
+
 ## 0.0.3
 
 - add linker script support

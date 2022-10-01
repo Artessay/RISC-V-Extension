@@ -3,6 +3,5 @@
 .gitignore
 .gitattributes
 .git/**
-samples/**
 node_modules/**
 *.yaml
