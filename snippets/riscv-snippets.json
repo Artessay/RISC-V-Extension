@@ -59,6 +59,24 @@
 		"description": "branch if not equal",
 		"scope": "source.riscv"
 	},
+	"csrr": {
+		"prefix": "csrr",
+		"body": "csrr  ${1:t0}, ${2:symbol} # $1 = $2",
+		"description": "control and status register read",
+		"scope": "source.riscv"
+	},
+	"csrrw": {
+		"prefix": "csrrw",
+		"body": "csrrw  ${1:t0}, ${2:symbol}, ${3:x0} # $1 = $2, $2 = $3",
+		"description": "control and status register read and write",
+		"scope": "source.riscv"
+	},
+	"csrw": {
+		"prefix": "csrw",
+		"body": "csrw  ${1:symbol}, ${2:t0} # $1 = $2",
+		"description": "control and status register set",
+		"scope": "source.riscv"
+	},
 	"jal": {
 		"prefix": "jal",
 		"body": "jal ${1:target}  # jump to $1 and save position to ra\n",
