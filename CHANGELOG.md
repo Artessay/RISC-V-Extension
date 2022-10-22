@@ -4,7 +4,7 @@
 
 - add auto closed comments when typing
 - include more intelligent code completion features
-- add supervisor mode instruction support
+- add supervisor mode instructions support
 
 ## 0.0.4
 
@@ -15,12 +15,12 @@
 ## 0.0.3
 
 - add linker script support
-- more comment syntax hightlight
+- more comment syntax highlight
 - include number and string highlight in linker script
 
 ## 0.0.2
 
-- rearrange catogory
+- rearrange category
 - new icon used
 
 ## 0.0.1

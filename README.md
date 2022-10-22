@@ -26,4 +26,4 @@ Visual Studio Code (1.5.0 or higher)
 
 ## License
 
-[MIT](https://github.com/stef-levesque/vscode-hexdump/blob/master/LICENSE.md)
+This extension is licensed under [MIT License](https://github.com/stef-levesque/vscode-hexdump/blob/master/LICENSE.md)
