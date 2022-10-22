@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+<!DOCTYPE plist>
+<plist>
   <dict>
     <key>fileTypes</key>
     <array>
@@ -495,7 +495,5 @@
     </array>
     <key>scopeName</key>
     <string>source.riscv</string>
-    <key>uuid</key>
-    <string>003223C7-B8D1-4B7F-BF91-5E0062B19B53</string>
   </dict>
 </plist>
