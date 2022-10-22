@@ -67,7 +67,7 @@
 	},
 	"la": {
 		"prefix": "la",
-		"body": "la ${1:t1}, ${2:var1} # \n",
+		"body": "la ${1:t0}, ${2:addr1} # \n",
 		"description": "load address",
 		"scope": "source.riscv"
 	},
@@ -75,6 +75,12 @@
 		"prefix": "lb",
 		"body": "lb ${1:t1}, ${2:${3:0}(${4:s1})} # \n",
 		"description": "load byte",
+		"scope": "source.riscv"
+	},
+	"ld": {
+		"prefix": "ld",
+		"body": "ld ${1:t1}, ${2:${3:0}(${4:s1})} # \n",
+		"description": "load doubleword",
 		"scope": "source.riscv"
 	},
 	"li": {

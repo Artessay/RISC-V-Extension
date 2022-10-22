@@ -1,8 +1,8 @@
 {
 	"name": "riscv-extension",
 	"displayName": "RISC-V Extension",
-	"description": "RISC-V Operating System development extension",
-	"version": "0.0.4",
+	"description": "RISC-V Operating System Development Extension",
+	"version": "0.0.5",
 	"publisher": "rihong",
 	"engines": {
 		"vscode": "^1.5.0"
@@ -56,7 +56,7 @@
 		"snippets": [
 			{
 				"language": "riscv",
-				"path": "./snippets/snippets.json"
+				"path": "./snippets/riscv-snippets.json"
 			}
 		]
 	},

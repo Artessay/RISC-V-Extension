@@ -20,7 +20,8 @@ SECTIONS
     .text : ALIGN(0x1000){
         _stext = .;
 
-        *(.text.entry)
+        *(.text.init)   /* 初始化字段 */
+        *(.text.entry)  /* 中断处理逻辑 会放置在 .text.entry */
         *(.text .text.*)
         
         _etext = .;

@@ -7,7 +7,7 @@ RISC-V development environment extension in Visual Studio Code, which provides s
 - RV32GC and RV64GC syntax highlight
 - Linker Script highlight
 - Assembler directives
-- Preprocessors like `#include` and `#define`
+- Intelligent auto close some symbols and comments
 - Comments: `#` and `/* */`
 
 ## Installation
@@ -18,14 +18,6 @@ RISC-V development environment extension in Visual Studio Code, which provides s
 4. Select `Install Extension`
 5. Choose the extension `RISC-V Extension`
 6. Reload *Visual Studio Code*, and the changes will automatically be applied to all relevant files.
-
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request  :D
 
 ## Requirements
 
