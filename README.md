@@ -7,7 +7,8 @@ RISC-V development environment extension in Visual Studio Code, which provides s
 - RV32GC and RV64GC syntax highlight
 - Linker Script highlight
 - Assembler directives
-- Intelligent auto close some symbols and comments
+- Auto close symbols and comments
+- Intelligent code completion
 - Comments: `#` and `/* */`
 
 ## Installation

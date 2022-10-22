@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.0.5
+
+- add auto closed comments when typing
+- include more intelligent code completion features
+- add supervisor mode instruction support
+
 ## 0.0.4
 
 - improve readme document
