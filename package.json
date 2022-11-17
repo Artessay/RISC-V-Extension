@@ -2,7 +2,7 @@
 	"name": "riscv-extension",
 	"displayName": "RISC-V Extension",
 	"description": "RISC-V Operating System Development Extension",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"publisher": "rihong",
 	"engines": {
 		"vscode": "^1.5.0"
@@ -36,6 +36,7 @@
 				"extensions": [
 					".ld",
 					".lds",
+					".lds.S",
 					".dld"
 				],
 				"configuration": "./configs/linker-language-configuration.json"

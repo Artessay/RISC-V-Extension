@@ -12,6 +12,7 @@ patterns:
   - include: '#expressions'
   - include: '#numberLiterals'
   - include: '#stringLiterals'
+  - include: '#preprocessor_context'
 repository:
   comments:
     name: comment.block.ld
@@ -488,3 +489,133 @@ repository:
         match: '\\U[0-9a-fA-F]{8}'
       - name: constant.character.escape
         match: '(\\[''"?\\abfnrtv])'
+
+  preprocessor_context:
+    patterns:
+      - include: "#include_preprocess"
+  
+  include_preprocess:
+    match: >-
+      ^((?:((?:(?>(?:\s)+)|\/\*(?:[^\*]|(?:\*)++[^\/])*+(?:\*)++\/)+)|(?:\b)|(?=\W)|(?<=\W)|(?:\A)|(?:\Z)))((#)(?:(?:\s)+)?((?:include|include_next))\b)(?:(?:\s)+)?(?:(?:(?:((<)[^>]*(>?)((?:((?:(?>(?:\s)+)|\/\*(?:[^\*]|(?:\*)++[^\/])*+(?:\*)++\/)+)|(?:\b)|(?=\W)|(?<=\W)|(?:\A)|(?:\Z)))(?:(?:(?:\n)|$)|(?=\/\/)))|((\")[^\"]*((?:\")?)((?:((?:(?>(?:\s)+)|\/\*(?:[^\*]|(?:\*)++[^\/])*+(?:\*)++\/)+)|(?:\b)|(?=\W)|(?<=\W)|(?:\A)|(?:\Z)))(?:(?:(?:\n)|$)|(?=\/\/))))|(((?:((?:(?>(?:\s)+)|\/\*(?:[^\*]|(?:\*)++[^\/])*+(?:\*)++\/)+)|(?:\b)|(?=\W)|(?<=\W)|(?:\A)|(?:\Z)))(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*(?:\.(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*)*((?:((?:(?>(?:\s)+)|\/\*(?:[^\*]|(?:\*)++[^\/])*+(?:\*)++\/)+)|(?:\b)|(?=\W)|(?<=\W)|(?:\A)|(?:\Z)))(?:(?:(?:\n)|$)|(?=(?:\/\/|;)))))|((?:((?:(?>(?:\s)+)|\/\*(?:[^\*]|(?:\*)++[^\/])*+(?:\*)++\/)+)|(?:\b)|(?=\W)|(?<=\W)|(?:\A)|(?:\Z)))(?:(?:(?:\n)|$)|(?=(?:\/\/|;))))
+    captures:
+      '1':
+        patterns:
+          - include: '#inline_comment'
+      '2':
+        patterns:
+          - match: '(?:(?>(?:\s)+)|(\/\*)((?:[^\*]|(?:\*)++[^\/])*+((?:\*)++\/)))'
+            captures:
+              '1':
+                name: comment.block.ld punctuation.definition.comment.begin.ld
+              '2':
+                name: comment.block.ld
+              '3':
+                patterns:
+                  - match: \*\/
+                    name: comment.block.ld punctuation.definition.comment.end.ld
+                  - match: \*
+                    name: comment.block.ld
+      '3':
+        name: keyword.control.directive.$5.ld
+      '4':
+        name: punctuation.definition.directive.ld
+      '6':
+        name: string.quoted.other.lt-gt.include.ld
+      '7':
+        name: punctuation.definition.string.begin.ld
+      '8':
+        name: punctuation.definition.string.end.ld
+      '9':
+        patterns:
+          - include: '#inline_comment'
+      '10':
+        patterns:
+          - match: '(?:(?>(?:\s)+)|(\/\*)((?:[^\*]|(?:\*)++[^\/])*+((?:\*)++\/)))'
+            captures:
+              '1':
+                name: comment.block.ld punctuation.definition.comment.begin.ld
+              '2':
+                name: comment.block.ld
+              '3':
+                patterns:
+                  - match: \*\/
+                    name: comment.block.ld punctuation.definition.comment.end.ld
+                  - match: \*
+                    name: comment.block.ld
+      '11':
+        name: string.quoted.double.include.ld
+      '12':
+        name: punctuation.definition.string.begin.ld
+      '13':
+        name: punctuation.definition.string.end.ld
+      '14':
+        patterns:
+          - include: '#inline_comment'
+      '15':
+        patterns:
+          - match: '(?:(?>(?:\s)+)|(\/\*)((?:[^\*]|(?:\*)++[^\/])*+((?:\*)++\/)))'
+            captures:
+              '1':
+                name: comment.block.ld punctuation.definition.comment.begin.ld
+              '2':
+                name: comment.block.ld
+              '3':
+                patterns:
+                  - match: \*\/
+                    name: comment.block.ld punctuation.definition.comment.end.ld
+                  - match: \*
+                    name: comment.block.ld
+      '16':
+        name: entity.name.other.preprocessor.macro.include.ld
+      '17':
+        patterns:
+          - include: '#inline_comment'
+      '18':
+        patterns:
+          - match: '(?:(?>(?:\s)+)|(\/\*)((?:[^\*]|(?:\*)++[^\/])*+((?:\*)++\/)))'
+            captures:
+              '1':
+                name: comment.block.ld punctuation.definition.comment.begin.ld
+              '2':
+                name: comment.block.ld
+              '3':
+                patterns:
+                  - match: \*\/
+                    name: comment.block.ld punctuation.definition.comment.end.ld
+                  - match: \*
+                    name: comment.block.ld
+      '19':
+        patterns:
+          - include: '#inline_comment'
+      '20':
+        patterns:
+          - match: '(?:(?>(?:\s)+)|(\/\*)((?:[^\*]|(?:\*)++[^\/])*+((?:\*)++\/)))'
+            captures:
+              '1':
+                name: comment.block.ld punctuation.definition.comment.begin.ld
+              '2':
+                name: comment.block.ld
+              '3':
+                patterns:
+                  - match: \*\/
+                    name: comment.block.ld punctuation.definition.comment.end.ld
+                  - match: \*
+                    name: comment.block.ld
+      '21':
+        patterns:
+          - include: '#inline_comment'
+      '22':
+        patterns:
+          - match: '(?:(?>(?:\s)+)|(\/\*)((?:[^\*]|(?:\*)++[^\/])*+((?:\*)++\/)))'
+            captures:
+              '1':
+                name: comment.block.ld punctuation.definition.comment.begin.ld
+              '2':
+                name: comment.block.ld
+              '3':
+                patterns:
+                  - match: \*\/
+                    name: comment.block.ld punctuation.definition.comment.end.ld
+                  - match: \*
+                    name: comment.block.ld
+    name: meta.preprocessor.include.ld
