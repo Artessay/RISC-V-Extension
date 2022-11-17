@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.6
+
+- highlight for include module
+- more feature for preprocess command support
+
 ## 0.0.5
 
 - add auto closed comments when typing
